@@ -47,10 +47,3 @@ int vitalsOk(float temperature, float pulseRate, float spo2) {
     }
     return 1;
 }
-
-
-
-int main() {
-    testVitals();
-    return 0;
-}
