@@ -140,4 +140,9 @@ void testVitals() {
     runTestCase("\n2. Warning case - approaching hypothermia:", 95.5f, 70.0f, 95.0f, true);
     runTestCase("\n3. Warning case - approaching hyperthermia:", 101.0f, 70.0f, 95.0f, true);
     runTestCase("\n4. Critical case:", 103.0f, 110.0f, 85.0f, false);
+
+    // Test legacy function for backward compatibility
+    std::cout << "\n5. Testing legacy function (no warnings):" << std::endl;
+    bool legacyResult = checkAllVitals(98.6f, 70.0f, 95.0f);
+    std::cout << "Legacy function result: " << (legacyResult ? "PASS" : "FAIL") << std::endl;
 }
