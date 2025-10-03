@@ -101,10 +101,9 @@ TEST(WarningTest, TemperatureWarnings) {
     // Hypothermia warning range: 95.0 to 96.53
     ASSERT_TRUE(isTemperatureWarning(95.5f));   // Low warning
     ASSERT_TRUE(isTemperatureWarning(96.0f));   // Mid warning
-    ASSERT_TRUE(isTemperatureWarning(96.5f));   // High warning
-
-    // Hyperthermia warning range: 100.47 to 102.0
-    ASSERT_TRUE(isTemperatureWarning(100.5f));  // Low warning ASSERT_TRUE(isTemperatureWarning(101.0f));//Mid warning
+    ASSERT_TRUE(isTemperatureWarning(96.5f));   // High warning    // Hyperthermia warning range: 100.47 to 102.0
+    ASSERT_TRUE(isTemperatureWarning(100.5f));  // Low warning
+    ASSERT_TRUE(isTemperatureWarning(101.0f));  // Mid warning
     ASSERT_TRUE(isTemperatureWarning(101.5f));  // High warning
 
     // No warning ranges
@@ -112,11 +111,11 @@ TEST(WarningTest, TemperatureWarnings) {
     ASSERT_FALSE(isTemperatureWarning(99.0f));  // Normal temp
 }
 
-TEST(WarningTest, PulseRateWarnings) {
-    // Low pulse warning range: 60.0 to 61.5
+TEST(WarningTest, PulseRateWarnings) {    // Low pulse warning range: 60.0 to 61.5
     ASSERT_TRUE(isPulseRateWarning(60.5f));     // Low warning
     ASSERT_TRUE(isPulseRateWarning(61.0f));     // Mid warning
-      // High pulse warning range: 98.5 to 100.0
+
+    // High pulse warning range: 98.5 to 100.0
     ASSERT_TRUE(isPulseRateWarning(99.0f));     // High warning
     ASSERT_TRUE(isPulseRateWarning(99.5f));     // High warning
 
@@ -125,7 +124,8 @@ TEST(WarningTest, PulseRateWarnings) {
     ASSERT_FALSE(isPulseRateWarning(85.0f));    // Normal pulse
 }
 
-TEST(WarningTest, Spo2Warnings) {    // Low SpO2 warning range: 90.0 to 91.35
+TEST(WarningTest, Spo2Warnings) {
+    // Low SpO2 warning range: 90.0 to 91.35
     ASSERT_TRUE(isSpo2Warning(90.5f));          // Low warning
     ASSERT_TRUE(isSpo2Warning(91.0f));          // Mid warning
 
@@ -146,4 +146,3 @@ TEST(VitalsWithWarningTest, MultipleWarnings) {
     ASSERT_EQ(vitalsOk(95.5f, 60.5f, 90.5f), 1);  // All three warnings
     ASSERT_EQ(vitalsOk(101.0f, 99.0f, 95), 1);     // Temp and pulse warnings
 }
-
