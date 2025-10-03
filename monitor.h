@@ -3,12 +3,28 @@
 #define MONITOR_H_
 
 #include <string>
-int vitalsOk(float temperature, float pulseRate, float spo2);
-bool isInRange(float value, float min, float max);
-bool isTemperatureOk(float temperature);
-bool isPulseRateOk(float pulseRate);
-bool isSpo2Ok(float spo2);
-bool checkVital(bool isOk, const std::string& alertMessage);
+
+int vitalsOk(const float temperature, const float pulseRate, const float spo2);
+bool isInRange(const float value, const float min, const float max);
+bool isTemperatureOk(const float temperature);
+bool isPulseRateOk(const float pulseRate);
+bool isSpo2Ok(const float spo2);
+
+// Extension 1: Early Warning System
+bool isTemperatureWarning(const float temperature);
+bool isPulseRateWarning(const float pulseRate);
+bool isSpo2Warning(const float spo2);
+void displayWarningAlert(const std::string& message);
+
+// Helper functions
+bool checkVital(const bool isOk, const std::string& alertMessage);
+bool checkVitalWithWarning(const bool isOk, const bool isWarning,
+                          const std::string& criticalMsg,
+                          const std::string& warningMsg);
+bool checkAllVitals(const float temperature, const float pulseRate,
+                    const float spo2);
+bool checkAllVitalsWithWarnings(const float temperature, 
+                               const float pulseRate, const float spo2);
 void displayCriticalAlert(const std::string& message);
 void testVitals();
 
