@@ -104,7 +104,7 @@ TEST(WarningTest, TemperatureWarnings) {
     ASSERT_TRUE(isTemperatureWarning(96.5f));   // High warning
 
     // Hyperthermia warning range: 100.47 to 102.0
-    ASSERT_TRUE(isTemperatureWarning(100.5f));  // Low warning    ASSERT_TRUE(isTemperatureWarning(101.0f));  // Mid warning
+    ASSERT_TRUE(isTemperatureWarning(100.5f));  // Low warning ASSERT_TRUE(isTemperatureWarning(101.0f));//Mid warning
     ASSERT_TRUE(isTemperatureWarning(101.5f));  // High warning
 
     // No warning ranges
@@ -146,3 +146,4 @@ TEST(VitalsWithWarningTest, MultipleWarnings) {
     ASSERT_EQ(vitalsOk(95.5f, 60.5f, 90.5f), 1);  // All three warnings
     ASSERT_EQ(vitalsOk(101.0f, 99.0f, 95), 1);     // Temp and pulse warnings
 }
+
