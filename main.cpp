@@ -1,6 +1,7 @@
-#include "monitor.h"
+// Copyright 2025 Health Monitor System
+#include "./monitor.h"
 
 int main() {
-    testVitals(); 
+    testVitals();
     return 0;
 }
