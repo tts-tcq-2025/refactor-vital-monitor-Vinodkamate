@@ -99,7 +99,7 @@ TEST(VitalsTest, ExtremeCases) {
 // Extension 1: Early Warning System Tests
 TEST(WarningTest, TemperatureWarnings) {
     // Hypothermia warning range: 95.0 to 96.53
-    ASSERT_TRUE(isTemperatureWarning(95.5f));   // Low warning  
+    ASSERT_TRUE(isTemperatureWarning(95.5f));   // Low warning
     ASSERT_TRUE(isTemperatureWarning(96.5f));   // High warning
 
     // Hyperthermia warning range: 100.47 to 102.0
@@ -147,3 +147,4 @@ TEST(VitalsWithWarningTest, MultipleWarnings) {
     ASSERT_EQ(vitalsOk(95.5f, 60.5f, 90.5f), 1);  // All three warnings
     ASSERT_EQ(vitalsOk(101.0f, 99.0f, 95), 1);     // Temp and pulse warnings
 }
+
