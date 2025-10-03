@@ -1,9 +1,14 @@
+// Copyright 2025 Health Monitor System
 #include "./monitor.h"
-#include <assert.h>
-#include <thread>
-#include <chrono>
 #include <iostream>
-using std::cout, std::flush, std::this_thread::sleep_for, std::chrono::seconds;
+#include <string>
+
+// Constants for vital sign thresholds
+const float TEMP_MIN = 95.0f;
+const float TEMP_MAX = 102.0f;
+const float PULSE_MIN = 60.0f;
+const float PULSE_MAX = 100.0f;
+const float SPO2_MIN = 90.0f;
 
 // Generic range checking function to avoid duplication
 bool isInRange(float value, float min, float max) {
@@ -25,25 +30,34 @@ bool isSpo2Ok(float spo2) {
     return spo2 >= SPO2_MIN;
 }
 
-// Function to display critical alert animation
 // Function to display critical alert
 void displayCriticalAlert(const std::string& message) {
     std::cout << message << std::endl;
 }
 
-// Main function to check vitals
+// Helper function to check and alert for a single vital
+bool checkVital(bool isOk, const std::string& alertMessage) {
+    if (!isOk) {
+        displayCriticalAlert(alertMessage);
+        return false;
+    }
+    return true;
+}
+
+// Main function to check vitals (CCN = 1)
 int vitalsOk(float temperature, float pulseRate, float spo2) {
-    if (!isTemperatureOk(temperature)) {
-        displayCriticalAlert("Temperature is critical!");
-        return 0;
-    }
-    if (!isPulseRateOk(pulseRate)) {
-        displayCriticalAlert("Pulse Rate is out of range!");
-        return 0;
-    }
-    if (!isSpo2Ok(spo2)) {
-        displayCriticalAlert("Oxygen Saturation out of range!");
-        return 0;
-    }
-    return 1;
+    return checkVital(isTemperatureOk(temperature), "Temperature is critical!") &&
+           checkVital(isPulseRateOk(pulseRate), "Pulse Rate is out of range!") &&
+           checkVital(isSpo2Ok(spo2), "Oxygen Saturation out of range!") ? 1 : 0;
+}
+
+// Test function for manual verification
+void testVitals() {
+    // Test normal case
+    int result1 = vitalsOk(98.6f, 70.0f, 95.0f);
+    std::cout << "Normal vitals test: " << (result1 ? "PASS" : "FAIL") << std::endl;
+    
+    // Test abnormal case
+    int result2 = vitalsOk(103.0f, 110.0f, 85.0f);
+    std::cout << "Abnormal vitals test: " << (result2 == 0 ? "PASS" : "FAIL") << std::endl;
 }
